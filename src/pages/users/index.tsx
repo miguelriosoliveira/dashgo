@@ -15,6 +15,8 @@ import {
 } from '@chakra-ui/react';
 import { RiAddLine, RiPencilLine } from 'react-icons/ri';
 
+import { Pagination } from '../../components';
+
 export default function UserList() {
 	return (
 		<Box flex="1" borderRadius={8} bg="gray.800" p="8">
@@ -73,6 +75,8 @@ export default function UserList() {
 					</Tr>
 				</Tbody>
 			</Table>
+
+			<Pagination />
 		</Box>
 	);
 }
