@@ -22,7 +22,7 @@ export default function UserList() {
 		<Box flex="1" borderRadius={8} bg="gray.800" p="8">
 			<Flex mb="8" justify="space-between" align="center">
 				<Heading size="lg" fontWeight="normal">
-					Usuários
+					Users
 				</Heading>
 
 				<Button
@@ -32,7 +32,7 @@ export default function UserList() {
 					colorScheme="pink"
 					leftIcon={<Icon as={RiAddLine} fontSize="20" />}
 				>
-					Criar novo
+					New
 				</Button>
 			</Flex>
 
@@ -42,8 +42,8 @@ export default function UserList() {
 						<Th px="6" color="gray.300" width="8">
 							<Checkbox colorScheme="pink" />
 						</Th>
-						<Th>Usuário </Th>
-						<Th>Data de cadastro</Th>
+						<Th>User </Th>
+						<Th>Created at</Th>
 						<Th w="8" />
 					</Tr>
 				</Thead>
@@ -59,7 +59,7 @@ export default function UserList() {
 							</Text>
 						</Td>
 						<Td>
-							<Text>04 de Abril, 2021</Text>
+							<Text>Apr 04, 2021</Text>
 						</Td>
 						<Td>
 							<Button
@@ -69,7 +69,7 @@ export default function UserList() {
 								colorScheme="facebook"
 								leftIcon={<Icon as={RiPencilLine} fontSize="16" />}
 							>
-								Editar
+								Edit
 							</Button>
 						</Td>
 					</Tr>

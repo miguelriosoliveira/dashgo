@@ -1,6 +1,6 @@
 import { Button, Flex, Stack } from '@chakra-ui/react';
 
-import { Input } from '../components/Form';
+import { Input } from '../components';
 
 export default function SignIn() {
 	return (
@@ -12,7 +12,7 @@ export default function SignIn() {
 				</Stack>
 
 				<Button type="submit" mt="6" colorScheme="pink" size="lg">
-					Entrar
+					Login
 				</Button>
 			</Flex>
 		</Flex>

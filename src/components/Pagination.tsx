@@ -4,7 +4,7 @@ export function Pagination() {
 	return (
 		<HStack mt="8" align="center" justify="space-between" spacing="6">
 			<Box>
-				<strong>1</strong> - <strong>10</strong> de <strong>100</strong>
+				<strong>1</strong> - <strong>10</strong> of <strong>100</strong>
 			</Box>
 
 			<HStack spacing="2">
