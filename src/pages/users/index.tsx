@@ -76,7 +76,7 @@ export default function UserList() {
 				</Tbody>
 			</Table>
 
-			<Pagination />
+			<Pagination currentPage={1} pageSize={10} totalItems={98} />
 		</Box>
 	);
 }
