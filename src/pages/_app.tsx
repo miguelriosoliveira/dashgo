@@ -4,7 +4,17 @@ import { AppProps } from 'next/app';
 import { Header, Sidebar } from '../components';
 import { theme } from '../styles/theme';
 
-function MyApp({ Component, pageProps }: AppProps) {
+import Login from '.';
+
+export default function App({ Component, pageProps }: AppProps) {
+	if (Component.name === Login.name) {
+		return (
+			<ChakraProvider theme={theme}>
+				<Component {...pageProps} />
+			</ChakraProvider>
+		);
+	}
+
 	return (
 		<ChakraProvider theme={theme}>
 			<Flex direction="column" h="100vh">
@@ -19,5 +29,3 @@ function MyApp({ Component, pageProps }: AppProps) {
 		</ChakraProvider>
 	);
 }
-
-export default MyApp;
