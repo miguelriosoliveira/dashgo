@@ -5,10 +5,10 @@ import { Header, Sidebar } from '../components';
 import { SidebarDrawerProvider } from '../contexts';
 import { theme } from '../styles/theme';
 
-import Login from '.';
+import SignIn from '.';
 
 export default function App({ Component, pageProps }: AppProps) {
-	if (Component.name === Login.name) {
+	if (Component.name === SignIn.name) {
 		return (
 			<ChakraProvider theme={theme}>
 				<Component {...pageProps} />
