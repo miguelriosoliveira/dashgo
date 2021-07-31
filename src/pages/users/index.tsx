@@ -29,7 +29,7 @@ export default function UserList() {
 					Users
 				</Heading>
 
-				<Link href="/users/create">
+				<Link href="/users/create" passHref>
 					<Button
 						as="a"
 						size="sm"
