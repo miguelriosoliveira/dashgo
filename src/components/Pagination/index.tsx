@@ -2,7 +2,7 @@ import { Box, HStack } from '@chakra-ui/react';
 
 import { clamp } from '../../utils';
 
-import { PaginationItem } from './PaginationItem';
+import { PaginationItem } from './components';
 
 interface PaginationProps {
 	currentPage: number;

@@ -1,13 +1,12 @@
 import { Box, Stack, Text } from '@chakra-ui/react';
-
-import { NavLink, NavLinkProps } from './NavLink';
+import { ReactNode } from 'react';
 
 interface NavSectionProps {
 	title: string;
-	navLinks: NavLinkProps[];
+	children: ReactNode;
 }
 
-export function NavSection({ title, navLinks }: NavSectionProps) {
+export function NavSection({ title, children }: NavSectionProps) {
 	return (
 		<Box>
 			<Text fontWeight="bold" color="gray.400" fontSize="small">
@@ -15,9 +14,7 @@ export function NavSection({ title, navLinks }: NavSectionProps) {
 			</Text>
 
 			<Stack spacing="4" mt="8" align="stretch">
-				{navLinks.map(navLink => (
-					<NavLink {...navLink} />
-				))}
+				{children}
 			</Stack>
 		</Box>
 	);

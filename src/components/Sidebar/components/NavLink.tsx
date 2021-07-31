@@ -3,15 +3,15 @@ import { ElementType } from 'react';
 
 export interface NavLinkProps extends LinkProps {
 	icon: ElementType;
-	title: string;
+	children: string;
 }
 
-export function NavLink({ icon, title, ...rest }: NavLinkProps) {
+export function NavLink({ icon, children, ...rest }: NavLinkProps) {
 	return (
 		<Link display="flex" alignItems="center" {...rest}>
 			<Icon as={icon} fontSize="20" />
 			<Text ml="4" fontWeight="medium">
-				{title}
+				{children}
 			</Text>
 		</Link>
 	);
