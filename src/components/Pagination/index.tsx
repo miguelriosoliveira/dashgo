@@ -1,4 +1,4 @@
-import { Box, HStack } from '@chakra-ui/react';
+import { Box, Stack, HStack } from '@chakra-ui/react';
 
 import { clamp } from '../../utils';
 
@@ -17,7 +17,7 @@ export function Pagination({ currentPage, pageSize, totalItems }: PaginationProp
 	const from = to - pageSize + 1;
 
 	return (
-		<HStack mt="8" align="center" justify="space-between" spacing="6">
+		<Stack direction={['column', 'row']} mt="8" align="center" justify="space-between" spacing="6">
 			<Box>
 				<strong>{from}</strong> - <strong>{to}</strong> of <strong>{totalItems}</strong>
 			</Box>
@@ -31,6 +31,6 @@ export function Pagination({ currentPage, pageSize, totalItems }: PaginationProp
 					/>
 				))}
 			</HStack>
-		</HStack>
+		</Stack>
 	);
 }
