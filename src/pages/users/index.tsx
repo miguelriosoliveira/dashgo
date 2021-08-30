@@ -35,7 +35,7 @@ interface UsersResponse {
 }
 
 export default function UserList() {
-	const { data, isLoading, isError } = useQuery<User[]>(
+	const { data, isLoading, isFetching, error } = useQuery<User[]>(
 		'users',
 		async () => {
 			const response = await axios.get<UsersResponse>('http://localhost:3000/api/users');
@@ -57,6 +57,7 @@ export default function UserList() {
 			<Flex mb="8" justify="space-between" align="center">
 				<Heading size="lg" fontWeight="normal">
 					Users
+					{!isLoading && isFetching && <Spinner size="sm" color="gray.500" ml="4" />}
 				</Heading>
 
 				<Link href="/users/create" passHref>
@@ -77,7 +78,7 @@ export default function UserList() {
 				<Flex justify="center">
 					<Spinner />
 				</Flex>
-			) : isError ? (
+			) : error ? (
 				<Flex justify="center">
 					<Text>Failed to recover users data</Text>
 				</Flex>
