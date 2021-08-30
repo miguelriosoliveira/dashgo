@@ -3,9 +3,14 @@ import { AppProps } from 'next/app';
 
 import { Header, Sidebar } from '../components';
 import { SidebarDrawerProvider } from '../contexts';
+import { makeServer } from '../services/mirage';
 import { theme } from '../styles/theme';
 
 import SignIn from '.';
+
+if (process.env.NODE_ENV === 'development') {
+	makeServer();
+}
 
 export default function App({ Component, pageProps }: AppProps) {
 	if (Component.name === SignIn.name) {
