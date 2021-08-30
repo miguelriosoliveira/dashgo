@@ -29,7 +29,7 @@ export function makeServer() {
 
 		// eslint-disable-next-line no-shadow
 		seeds(server) {
-			server.createList('user', 200);
+			server.createList('user', 10);
 		},
 
 		routes() {

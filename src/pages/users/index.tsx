@@ -15,16 +15,33 @@ import {
 	Tr,
 	useBreakpointValue,
 } from '@chakra-ui/react';
+import axios from 'axios';
 import Link from 'next/link';
 import { RiAddLine, RiPencilLine } from 'react-icons/ri';
 import { useQuery } from 'react-query';
 
 import { Pagination } from '../../components';
+import { formatDate } from '../../utils/formatter';
+
+interface User {
+	id: string;
+	name: string;
+	email: string;
+	createdAt: string;
+}
+
+interface UsersResponse {
+	users: User[];
+}
 
 export default function UserList() {
-	const { data, isLoading, isError } = useQuery('users', async () => {
-		const response = await fetch('http://localhost:3000/api/users');
-		const users = await response.json();
+	const { data, isLoading, isError } = useQuery<User[]>('users', async () => {
+		// eslint-disable-next-line no-shadow
+		const { data } = await axios.get<UsersResponse>('http://localhost:3000/api/users');
+		const users = data.users.map(user => ({
+			...user,
+			createdAt: formatDate(new Date(user.createdAt)),
+		}));
 		return users;
 	});
 
@@ -73,35 +90,37 @@ export default function UserList() {
 							</Tr>
 						</Thead>
 						<Tbody>
-							<Tr>
-								<Td px={['1', '4', '6']}>
-									<Checkbox colorScheme="pink" />
-								</Td>
-								<Td>
-									<Text fontWeight="bold">Miguel Rios</Text>
-									<Text fontSize="sm" color="gray.300">
-										miguelriosoliveira@gmail.com
-									</Text>
-								</Td>
-								{isWideScreen && (
-									<Td>
-										<Text>Apr 04, 2021</Text>
+							{data.map(user => (
+								<Tr key={user.id}>
+									<Td px={['1', '4', '6']}>
+										<Checkbox colorScheme="pink" />
 									</Td>
-								)}
-								{isWideScreen && (
 									<Td>
-										<Button
-											as="a"
-											size="sm"
-											fontSize="sm"
-											colorScheme="facebook"
-											leftIcon={<Icon as={RiPencilLine} fontSize="16" />}
-										>
-											Edit
-										</Button>
+										<Text fontWeight="bold">{user.name}</Text>
+										<Text fontSize="sm" color="gray.300">
+											{user.email}
+										</Text>
 									</Td>
-								)}
-							</Tr>
+									{isWideScreen && (
+										<Td>
+											<Text>{user.createdAt}</Text>
+										</Td>
+									)}
+									{isWideScreen && (
+										<Td>
+											<Button
+												as="a"
+												size="sm"
+												fontSize="sm"
+												colorScheme="facebook"
+												leftIcon={<Icon as={RiPencilLine} fontSize="16" />}
+											>
+												Edit
+											</Button>
+										</Td>
+									)}
+								</Tr>
+							))}
 						</Tbody>
 					</Table>
 
