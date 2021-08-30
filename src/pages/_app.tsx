@@ -1,5 +1,6 @@
 import { ChakraProvider, Flex } from '@chakra-ui/react';
 import { AppProps } from 'next/app';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 import { Header, Sidebar } from '../components';
 import { SidebarDrawerProvider } from '../contexts';
@@ -12,28 +13,34 @@ if (process.env.NODE_ENV === 'development') {
 	makeServer();
 }
 
+const queryClient = new QueryClient();
+
 export default function App({ Component, pageProps }: AppProps) {
 	if (Component.name === SignIn.name) {
 		return (
-			<ChakraProvider theme={theme}>
-				<Component {...pageProps} />
-			</ChakraProvider>
+			<QueryClientProvider client={queryClient}>
+				<ChakraProvider theme={theme}>
+					<Component {...pageProps} />
+				</ChakraProvider>
+			</QueryClientProvider>
 		);
 	}
 
 	return (
-		<ChakraProvider theme={theme}>
-			<SidebarDrawerProvider>
-				<Flex direction="column" h="100vh">
-					<Header />
+		<QueryClientProvider client={queryClient}>
+			<ChakraProvider theme={theme}>
+				<SidebarDrawerProvider>
+					<Flex direction="column" h="100vh">
+						<Header />
 
-					<Flex w="100%" my="6" maxWidth={1480} mx="auto" px="6">
-						<Sidebar />
+						<Flex w="100%" my="6" maxWidth={1480} mx="auto" px="6">
+							<Sidebar />
 
-						<Component {...pageProps} />
+							<Component {...pageProps} />
+						</Flex>
 					</Flex>
-				</Flex>
-			</SidebarDrawerProvider>
-		</ChakraProvider>
+				</SidebarDrawerProvider>
+			</ChakraProvider>
+		</QueryClientProvider>
 	);
 }
