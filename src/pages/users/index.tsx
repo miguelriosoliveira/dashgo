@@ -15,12 +15,12 @@ import {
 	Tr,
 	useBreakpointValue,
 } from '@chakra-ui/react';
-import axios from 'axios';
 import Link from 'next/link';
 import { RiAddLine, RiPencilLine } from 'react-icons/ri';
 import { useQuery } from 'react-query';
 
 import { Pagination } from '../../components';
+import { api } from '../../services/api';
 import { formatDate } from '../../utils/formatter';
 
 interface User {
@@ -38,7 +38,7 @@ export default function UserList() {
 	const { data, isLoading, isFetching, error } = useQuery<User[]>(
 		'users',
 		async () => {
-			const response = await axios.get<UsersResponse>('http://localhost:3000/api/users');
+			const response = await api.get<UsersResponse>('/users');
 			const users = response.data.users.map(user => ({
 				...user,
 				createdAt: formatDate(new Date(user.createdAt)),
