@@ -1,6 +1,7 @@
 import { ChakraProvider, Flex } from '@chakra-ui/react';
 import { AppProps } from 'next/app';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
 import { Header, Sidebar } from '../components';
 import { SidebarDrawerProvider } from '../contexts';
@@ -41,6 +42,8 @@ export default function App({ Component, pageProps }: AppProps) {
 					</Flex>
 				</SidebarDrawerProvider>
 			</ChakraProvider>
+
+			<ReactQueryDevtools />
 		</QueryClientProvider>
 	);
 }

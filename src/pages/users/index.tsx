@@ -35,15 +35,20 @@ interface UsersResponse {
 }
 
 export default function UserList() {
-	const { data, isLoading, isError } = useQuery<User[]>('users', async () => {
-		// eslint-disable-next-line no-shadow
-		const { data } = await axios.get<UsersResponse>('http://localhost:3000/api/users');
-		const users = data.users.map(user => ({
-			...user,
-			createdAt: formatDate(new Date(user.createdAt)),
-		}));
-		return users;
-	});
+	const { data, isLoading, isError } = useQuery<User[]>(
+		'users',
+		async () => {
+			const response = await axios.get<UsersResponse>('http://localhost:3000/api/users');
+			const users = response.data.users.map(user => ({
+				...user,
+				createdAt: formatDate(new Date(user.createdAt)),
+			}));
+			return users;
+		},
+		{
+			staleTime: 1000 * 5, // five seconds
+		},
+	);
 
 	const isWideScreen = useBreakpointValue({ base: false, lg: true });
 
