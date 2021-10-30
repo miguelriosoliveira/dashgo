@@ -14,17 +14,18 @@ interface UsersResponse {
 	users: User[];
 }
 
-async function getUsers() {
-	const response = await api.get<UsersResponse>('/users');
-	const users = response.data.users.map(user => ({
+async function getUsers(page: number) {
+	const { data, headers } = await api.get<UsersResponse>('/users', { params: { page } });
+	const totalCount = Number(headers['x-total-count']);
+	const users = data.users.map(user => ({
 		...user,
 		createdAt: formatDate(new Date(user.createdAt)),
 	}));
-	return users;
+	return { users, totalCount };
 }
 
-export function useUsers() {
-	return useQuery('users', getUsers, {
-		staleTime: 1000 * 5, // five seconds
+export function useUsers(page: number) {
+	return useQuery(['users', page], () => getUsers(page), {
+		staleTime: 5 * 1000, // five seconds
 	});
 }

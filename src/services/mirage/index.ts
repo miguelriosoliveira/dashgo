@@ -29,7 +29,7 @@ export function makeServer() {
 
 		// eslint-disable-next-line no-shadow
 		seeds(server) {
-			server.createList('user', 10);
+			server.createList('user', 89);
 		},
 
 		routes() {
@@ -37,7 +37,7 @@ export function makeServer() {
 			this.timing = 750;
 
 			this.get('/users', function f(schema, request) {
-				const { page = 1, per_page = 3 } = request.queryParams;
+				const { page = 1, per_page = 10 } = request.queryParams;
 				const total = schema.all('user').length;
 				const pageStart = (Number(page) - 1) * Number(per_page);
 				const pageEnd = pageStart + Number(per_page);
