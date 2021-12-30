@@ -102,7 +102,7 @@ export default function UserList() {
 									</Td>
 									{isWideScreen && (
 										<Td>
-											<Text>{user.createdAt}</Text>
+											<Text>{user.created_at}</Text>
 										</Td>
 									)}
 									{isWideScreen && (

@@ -1,5 +1,5 @@
 import faker from 'faker';
-import { createServer, Factory, Model, Response } from 'miragejs';
+import { ActiveModelSerializer, createServer, Factory, Model, Response } from 'miragejs';
 
 interface User {
 	name: string;
@@ -9,6 +9,10 @@ interface User {
 
 export function makeServer() {
 	const server = createServer({
+		serializers: {
+			application: ActiveModelSerializer,
+		},
+
 		models: {
 			user: Model.extend<Partial<User>>({}),
 		},
@@ -41,7 +45,9 @@ export function makeServer() {
 				const total = schema.all('user').length;
 				const pageStart = (Number(page) - 1) * Number(per_page);
 				const pageEnd = pageStart + Number(per_page);
-				const users = this.serialize(schema.all('user')).users.slice(pageStart, pageEnd);
+				const users = this.serialize(schema.all('user'))
+					.users.sort((a, b) => b.created_at - a.created_at)
+					.slice(pageStart, pageEnd);
 				return new Response(
 					200,
 					{

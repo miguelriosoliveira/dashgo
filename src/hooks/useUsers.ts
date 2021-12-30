@@ -7,7 +7,7 @@ interface User {
 	id: string;
 	name: string;
 	email: string;
-	createdAt: string;
+	created_at: string;
 }
 
 interface UsersResponse {
@@ -19,7 +19,7 @@ async function getUsers(page: number) {
 	const totalCount = Number(headers['x-total-count']);
 	const users = data.users.map(user => ({
 		...user,
-		createdAt: formatDate(new Date(user.createdAt)),
+		created_at: formatDate(new Date(user.created_at)),
 	}));
 	return { users, totalCount };
 }
