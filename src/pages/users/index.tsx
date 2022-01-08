@@ -16,18 +16,19 @@ import {
 	Tr,
 	useBreakpointValue,
 } from '@chakra-ui/react';
+import { GetServerSideProps } from 'next';
 import NextLink from 'next/link';
 import { useState } from 'react';
 import { RiAddLine, RiPencilLine } from 'react-icons/ri';
 
 import { Pagination } from '../../components';
-import { useUsers } from '../../hooks';
+import { getUsers, UsersResponse, useUsers } from '../../hooks';
 import { api } from '../../services/api';
 import { queryClient } from '../../services/queryClient';
 
-export default function UserList() {
+export default function UserList({ users, totalCount }: UsersResponse) {
 	const [currentPage, setCurrentPage] = useState(1);
-	const { data, isLoading, isFetching, error } = useUsers(currentPage);
+	const { data, isLoading, isFetching, error } = useUsers(currentPage, { users, totalCount });
 	const isWideScreen = useBreakpointValue({ base: false, lg: true });
 
 	async function handlePrefetchUser(userId: string) {
@@ -133,3 +134,10 @@ export default function UserList() {
 		</Box>
 	);
 }
+
+export const getServerSideProps: GetServerSideProps<UsersResponse> = async () => {
+	console.log(222);
+	const { users, totalCount } = await getUsers(1);
+	console.log(333);
+	return { props: { users, totalCount } };
+};
