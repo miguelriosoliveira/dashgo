@@ -26,9 +26,13 @@ import { getUsers, UsersResponse, useUsers } from '../../hooks';
 import { api } from '../../services/api';
 import { queryClient } from '../../services/queryClient';
 
-export default function UserList({ users, totalCount }: UsersResponse) {
+// export default function UserList({ users, totalCount }: UsersResponse) {
+export default function UserList() {
 	const [currentPage, setCurrentPage] = useState(1);
-	const { data, isLoading, isFetching, error } = useUsers(currentPage, { users, totalCount });
+	const { data, isLoading, isFetching, error } = useUsers(
+		currentPage,
+		// { users, totalCount }
+	);
 	const isWideScreen = useBreakpointValue({ base: false, lg: true });
 
 	async function handlePrefetchUser(userId: string) {
@@ -135,9 +139,7 @@ export default function UserList({ users, totalCount }: UsersResponse) {
 	);
 }
 
-export const getServerSideProps: GetServerSideProps<UsersResponse> = async () => {
-	console.log(222);
-	const { users, totalCount } = await getUsers(1);
-	console.log(333);
-	return { props: { users, totalCount } };
-};
+// export const getServerSideProps: GetServerSideProps<UsersResponse> = async () => {
+// 	const { users, totalCount } = await getUsers(1);
+// 	return { props: { users, totalCount } };
+// };
